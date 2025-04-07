@@ -20,6 +20,9 @@ cd BlogApplication
 # Install dependencies
 npm install
 
+# Add folder in public dir
+- name the folder as uploads
+
 #Create .env 
 - CONFIGURE PORT AND MONGO_URL
 
