@@ -1,0 +1,63 @@
+<nav class="bg-gray-800">
+    <div class="flex items-center justify-between">
+        <div class="relative flex h-16 items-center">
+            <div class="flex items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <img class="pl-2 h-14 w-auto" src="/ApplicationStatics/ApplicationLogo.png">
+                </div>
+
+                <!-- Navbar Items -->
+                <div class="hidden sm:block ml-4">
+                    <div class="flex flex-row space-x-2">
+                        <a href="/" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                            aria-current="page">Dashboard</a>
+
+                        <% if (locals.user) { %>
+                            <a href="/blog/add-new"
+                                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                                aria-current="page">Add Blog</a>
+                            <% let userObj=JSON.parse(user); %>
+                                <span class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                                    aria-current="page">Welcome,
+                                    <%= userObj.fullName %>
+                                </span>
+                                <% } else { %>
+                                    <a href="/user/signup"
+                                        class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                                        aria-current="page">Sign up</a>
+
+                                    <a href="user/signin"
+                                        class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                                        aria-current="page">
+                                        Sign in
+                                    </a>
+                                    <% } %>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Push Avatar to Right -->
+        <% if (locals.user) { %>
+
+            <!-- Avatar Container -->
+            <div class="relative group mr-8">
+                <!-- Avatar Button -->
+                <button class="flex items-center space-x-2 focus:outline-none">
+                    <img src="<%= JSON.parse(locals.user).profileImageURL %>" alt="User Avatar"
+                        class="w-10 h-10 rounded-full border-2 border-gray-300">
+                </button>
+
+                <!-- Dropdown Menu -->
+                <div
+                    class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-20 
+        opacity-0 scale-95 group-hover:opacity-100 group-hover:scale-100 transform transition-all duration-200 ease-in-out">
+                    <a href="#" class="block px-4 py-2 text-gray-700 text-sm hover:bg-gray-100">Profile</a>
+                    <hr>
+                    <a href="/user/logout" class="block px-4 py-2 text-gray-700 text-sm hover:bg-gray-100">Logout</a>
+                </div>
+            </div>
+            <% } %>
+    </div>
+</nav>
