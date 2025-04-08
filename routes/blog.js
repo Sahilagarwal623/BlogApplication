@@ -57,7 +57,7 @@ router.get('/:id', async (req, res) => {
     const blog = await Blog.findById(req.params.id).populate('createdBy');
     const comments = await Comment.find({ blogId: req.params.id }).populate('createdBy');
     
-    console.log(blog);
+    // console.log(blog);
     
     return res.render('blog', {
         user: JSON.stringify(req.user),
@@ -69,7 +69,7 @@ router.get('/:id', async (req, res) => {
 router.post('/deleteBlog/:id', async (req, res) => {
 
     const response = await Blog.deleteOne({ _id: req.params.id});
-    console.log(response);
+    // console.log(response);
     res.redirect('/');
 })
 
