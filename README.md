@@ -20,11 +20,13 @@ cd BlogApplication
 # Install dependencies
 npm install
 
-# Add folder in public dir
-- name the folder as uploads
-
 #Create .env 
-- CONFIGURE PORT AND MONGO_URL
+#CONFIGURE
+-PORT
+-MONGO_URL
+-CLOUDINARY_CLOUD_NAME
+-CLOUDINARY_API_KEY
+-CLOUDINARY_API_SECRET
 
 #Start the Application
 npm start
