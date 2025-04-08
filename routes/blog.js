@@ -5,7 +5,7 @@ const fs = require('fs')
 const multer = require('multer');
 const Blog = require('../models/blog');
 const Comment = require('../models/comment');
-const { uploadImage } = require('../services/upload');
+const { uploadImage , deleteAsset} = require('../services/upload');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -28,7 +28,7 @@ router.get('/add-new', (req, res) => {
 
 router.post('/', upload.single('coverImage'), async (req, res) => {
 
-    const cloud_image_url = await uploadImage(req.file ? `/uploads/${req.file.filename}` : '/images/cardImage.png');
+    const response = await uploadImage(req.file ? `/uploads/${req.file.filename}` : '/images/cardImage.png');
 
     if (req.file) {
         const filePath = path.join(__dirname, '../public/uploads', req.file.filename);
@@ -44,9 +44,10 @@ router.post('/', upload.single('coverImage'), async (req, res) => {
         title,
         body: about,
         createdBy: req.user._id,
-        coverImageURL: cloud_image_url,
+        coverImageURL: response.secure_url,
+        imageId: response.image_id,
     });
-    // console.log(blog);
+    console.log(blog);
 
     res.redirect('/');
 })
@@ -78,7 +79,11 @@ router.get('/:id', async (req, res) => {
 
 router.post('/deleteBlog/:id', async (req, res) => {
 
+    const blog = await Blog.findOne({_id: req.params.id});
+    // console.log(blog);
+    
     const response = await Blog.deleteOne({ _id: req.params.id });
+    await deleteAsset(blog.imageId);
     // console.log(response);
     res.redirect('/');
 })

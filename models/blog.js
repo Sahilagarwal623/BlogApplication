@@ -13,6 +13,10 @@ const blogSchema = new Schema({
         type: String,
         required: false,
     },
+    imageId: {
+        type: String,
+        required: false,
+    },
     createdBy: {
         type: Schema.Types.ObjectId,
         ref: 'user',
