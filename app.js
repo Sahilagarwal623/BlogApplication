@@ -34,10 +34,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.resolve('./views'));
 
 app.get('/', async (req, res) => {
-    const allBlogs = await Blog.find({});
-
-    console.log(req.user);
-    
+    const allBlogs = await Blog.find({});    
     res.render('home', {
         user: JSON.stringify(req.user),
         blogs: allBlogs,
