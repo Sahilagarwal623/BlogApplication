@@ -1,6 +1,8 @@
+const path = require('path');
+
 const cloudinary = require('cloudinary').v2;
 
-async function uploadImage(path) {
+async function uploadImage(filepath) {
 
     // Configuration
     cloudinary.config({
@@ -10,7 +12,7 @@ async function uploadImage(path) {
     });
 
     // Upload an image
-    const image = `C:/NodeJs/Blogify/public${path}`;
+    const image = path.join(__dirname, '../public', filepath);
     const uploadResult = await cloudinary.uploader
         .upload(image, {
             folder: 'uploads'

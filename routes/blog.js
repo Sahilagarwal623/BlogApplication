@@ -32,6 +32,8 @@ router.post('/', upload.single('coverImage'), async (req, res) => {
 
     if (req.file) {
         const filePath = path.join(__dirname, '../public/uploads', req.file.filename);
+        console.log(filePath);
+        
         fs.unlink(filePath, (err) => {
             if (err) console.error('Failed to delete file:', err);
             else console.log('File deleted successfully');
