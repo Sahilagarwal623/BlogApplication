@@ -20,7 +20,7 @@ const { checkForAuthenticationCookie } = require('./middlewares/authentication')
 mongoose.connect(uri).then(() => console.log("connected to mongodb")).catch(err => console.log(err)
 );
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 5000;
 
 app.use(express.static(path.resolve("./public")));
 app.use(cookieParser());
